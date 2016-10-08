@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/savonarola/rotating_file_writer.svg?branch=master)](https://travis-ci.org/savonarola/rotating_file_writer)
+
 # RotatingFileWriter
 
 `RotatingFileWriter` is a simple write dispatcher. It opens file

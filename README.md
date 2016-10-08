@@ -1,10 +1,50 @@
 # RotatingFileWriter
 
-**TODO: Add description**
+`RotatingFileWriter` is a simple write dispatcher. It opens file
+on the basis of `strftime` pattern and current time and automatically
+reopens it when pattern starts to interpolate into new name.
+
+## Example
+
+Basic usage:
+
+```elixir
+{:ok, writer} = RotatingFileWriter.start_link({"log/%F-%H.log", "Europe/Moscow"})
+
+RotatingFileWriter.write(writer, "some log record")
+# ...
+RotatingFileWriter.write(writer, "some log record")
+
+RotatingFileWriter.stop(writer)
+
+```
+
+Advanced usage:
+
+```elixir
+{:ok, writer} = RotatingFileWriter.start_link(
+  fn(time) ->
+     Timex.format!(time, "log/{ISOweek-day}.log")
+  end, # Custom file name generating function
+  mode: [:write, :append, :sync], # Custom file open mode
+  gen_server_opts: [name: RotatingLog], # GenServer options
+  check_interval: 10000 # Custom interval of checking file name change, ms
+)
+
+RotatingFileWriter.write(writer, "some log record")
+
+current_file_name = RotatingFileWriter.file_name(writer)
+
+RotatingFileWriter.reopen(writer)
+
+RotatingFileWriter.stop(writer)
+
+```
+
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
+The package can be installed as:
 
   1. Add `rotating_file_writer` to your list of dependencies in `mix.exs`:
 
@@ -22,3 +62,6 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
     end
     ```
 
+## License
+
+This software is licensed under [MIT License](LICENSE).

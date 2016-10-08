@@ -28,9 +28,11 @@ Advanced usage:
   fn(time) ->
      Timex.format!(time, "log/{ISOweek-day}.log")
   end, # Custom file name generating function
-  mode: [:write, :append, :sync], # Custom file open mode
-  gen_server_opts: [name: RotatingLog], # GenServer options
-  check_interval: 10000 # Custom interval of checking file name change, ms
+  [
+    mode: [:write, :append, :sync], # Custom file open mode
+    gen_server_opts: [name: RotatingLog], # GenServer options
+    check_interval: 10000 # Custom interval of checking file name change, ms
+  ]
 )
 
 RotatingFileWriter.write(writer, "some log record")

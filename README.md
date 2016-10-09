@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/savonarola/rotating_file_writer.svg?branch=master)](https://travis-ci.org/savonarola/rotating_file_writer)
+[![Coverage Status](https://coveralls.io/repos/github/savonarola/rotating_file_writer/badge.svg?branch=master)](https://coveralls.io/github/savonarola/rotating_file_writer?branch=master)
 
 # RotatingFileWriter
 
